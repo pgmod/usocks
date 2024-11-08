@@ -11,5 +11,5 @@ services:
       - "${PORT}:${PORT}"
     env_file:
       - .env
-    command: ["./socks"]
+    command: ["/socks"]
     restart: always  # Перезапускать контейнер в случае падения

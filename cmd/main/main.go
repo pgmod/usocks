@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 
@@ -17,6 +18,7 @@ func main() {
 	for {
 		counter++
 		if os.Getenv("USER_"+strconv.Itoa(counter)) != "" {
+			fmt.Println("Adding user " + os.Getenv("USER_"+strconv.Itoa(counter)))
 			creds[os.Getenv("USER_"+strconv.Itoa(counter))] = os.Getenv("PASS_" + strconv.Itoa(counter))
 		} else {
 			break
@@ -33,7 +35,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	fmt.Println("Listening on port " + port)
 	if err := server.ListenAndServe("tcp", "0.0.0.0:"+port); err != nil {
 		panic(err)
 	}
