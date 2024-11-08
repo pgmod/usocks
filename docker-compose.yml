@@ -9,6 +9,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "${PORT}:${PORT}"
+      - "${PORT}:${PORT}/udp"
     env_file:
       - .env
     command: ["/socks"]
