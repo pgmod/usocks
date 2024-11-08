@@ -1,0 +1,15 @@
+services:
+  socks:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 20m
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+    command: ["socks"]
+    restart: always  # Перезапускать контейнер в случае падения
