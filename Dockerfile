@@ -1,5 +1,5 @@
 # Используем официальный образ Go для сборки
-FROM golang:1.23-bookworm AS builder
+FROM golang:alpine AS builder
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN go mod download
 COPY . .
 
 # Собираем проект
-RUN go build -o socks ./cmd/main/
+RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o socks ./cmd/main/
 # Создаём финальный минималистичный образ
 FROM scratch
 
@@ -22,4 +22,4 @@ COPY --from=builder /app/socks /socks
 
 
 # Определяем команду по умолчанию
-CMD ["/socks"]
+CMD ["./socks"]
