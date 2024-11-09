@@ -1,4 +1,4 @@
-module usocks
+module github.com/pgmod/usocks
 
 go 1.23.2
 
